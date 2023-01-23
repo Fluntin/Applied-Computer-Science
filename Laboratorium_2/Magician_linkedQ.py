@@ -6,7 +6,8 @@ if __name__ == "__main__":
     
     while deck.size()<5:
         deck.enqueue(int(input()))
-        print(deck.size())
+        #print(deck.size())
+        #deck.print()
 
     
     count=0
