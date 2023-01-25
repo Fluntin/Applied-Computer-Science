@@ -19,12 +19,21 @@ class LinkedQ:
             temp=temp.next
          
     def size(self):
-        temp = self.head
-        count=0
-        while (temp):
-            count+=1
-            temp=temp.next
-        return (count)
+        if self.isEmpty():
+            return 0
+        else:
+            counter = 1
+            x = self.tail
+            while x.next != None:
+                counter += 1
+                x= x.next 
+            return counter
+       # temp = self.head
+       # count=0
+       # while (temp):
+           # count+=1
+            #temp=temp.next
+       # return (count)
         
     def isEmpty(self):
         if self.tail!=None:
@@ -40,10 +49,27 @@ class LinkedQ:
             self.tail=newNode
             
         else:
-            self.tail.next=newNode
+            newNode.next=self.tail
             self.tail=newNode
             
+            
     def dequeue(self):
-        data=self.head.data
-        self.head=self.head.next
-        return(data)
+        if self.isEmpty():
+            return None
+        elif self.head == self.tail:
+            data = self.head.data
+            self.head = None
+            self.tail = None
+            return data
+        else:
+            data = self.head.data
+            y = self.tail
+            while y.next != self.head:
+                y = y.next
+
+            self.head = y 
+            y.next == None
+            return data
+        #data=self.head.data
+        #self.head=self.head.next
+        #return(data)

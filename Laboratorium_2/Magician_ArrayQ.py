@@ -20,7 +20,6 @@ if __name__ == '__main__':
     while deck.size()<5:
         deck.enqueue(int(input()))
 
-    
     count=0
     while deck.isEmpty() == False:
 
