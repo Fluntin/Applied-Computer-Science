@@ -17,7 +17,7 @@ if __name__ == '__main__':
     
     deck=ArrayQ()
     
-    while deck.size()<13:
+    while deck.size()<5:
         deck.enqueue(int(input()))
 
     
@@ -31,5 +31,3 @@ if __name__ == '__main__':
             deck.enqueue(card)
         else:
             print(card)
-        
-    

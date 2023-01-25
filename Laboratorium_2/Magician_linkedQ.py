@@ -1,4 +1,4 @@
-from linkedQFile import LinkedQ
+from linkedQFile2 import LinkedQ
 
 if __name__ == "__main__":
     
