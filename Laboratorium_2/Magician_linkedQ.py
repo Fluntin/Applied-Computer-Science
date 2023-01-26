@@ -9,7 +9,6 @@ if __name__ == "__main__":
     indata=indata.split()
 
     for i in range(len(indata)):
-    #while deck.size()<5:
         deck.enqueue((indata[i]))
 
     count=0
@@ -21,4 +20,4 @@ if __name__ == "__main__":
         if count%2 !=0:
             deck.enqueue(card)
         else:
-            print(card)
+            print(card, end =" ")

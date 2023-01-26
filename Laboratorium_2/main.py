@@ -1,6 +1,6 @@
 import sys
 #from arrayQFile import ArrayQ
-from linkedQFile import LinkedQ
+from linkedQFile3 import LinkedQ
 
 if __name__ == "__main__":
     
