@@ -1,4 +1,4 @@
-from bintreeFile import Bintree
+from bintreeFile2 import Bintree
 
 def makeTree():
     tree = Bintree()
@@ -19,7 +19,7 @@ def searches(tree):
 
 def main():
     tree = makeTree()
-    tree.write()
+    #tree.write()
     searches(tree)
     
 main()
