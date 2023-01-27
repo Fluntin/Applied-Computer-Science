@@ -56,7 +56,6 @@ def putta (root, newvalue):
                 putta (pointer.right, newvalue)
     #------------------------------------------------- OK   
     
-    # newvalue is already in the tree
     return (root) 
     #------------------------------------------------- OK  
   
