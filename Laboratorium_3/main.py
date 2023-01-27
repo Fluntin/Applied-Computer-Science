@@ -1,8 +1,8 @@
-from bintreeFile2 import Bintree
+from bintreeFile import Bintree
 
 def makeTree():
     tree = Bintree()
-    data = input().strip()
+    data = input().strip() 
     while data != "#":
         tree.put(data)
         data = input().strip()

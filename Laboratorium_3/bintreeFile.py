@@ -24,7 +24,6 @@ class Bintree:
         
 # Help functions----------------------------------------------------------------
 
-#copy-paste
 def putta(root, newvalue):
     if root is None:
         return Node(newvalue)
