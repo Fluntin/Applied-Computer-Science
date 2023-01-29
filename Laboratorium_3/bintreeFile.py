@@ -27,10 +27,13 @@ class Bintree:
 def putta(root, newvalue):
     if root is None:
         return Node(newvalue)
+    
+    
     if newvalue > root.value:
         root.right = putta(root.right, newvalue)
     else:
         root.left = putta(root.left, newvalue)
+        
     return root
   
 
