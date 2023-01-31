@@ -20,4 +20,5 @@ with open("engelska.txt", "r", encoding = "utf-8") as engelskfil:
                 english.put(ordet)
                 print(ordet, end=" ")
 
+#Com#
 print("\n")
