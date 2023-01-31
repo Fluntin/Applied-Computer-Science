@@ -35,8 +35,6 @@ def putta(root, newvalue):
         root.left = putta(root.left, newvalue)
         
     return root
-  
-
 #---------------------------------------------------------------------------------------------
 def finns (pointer, value):
     

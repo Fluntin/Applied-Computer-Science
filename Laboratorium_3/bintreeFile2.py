@@ -89,6 +89,7 @@ def finns (pointer, value):
  # https://stackoverflow.com/questions/34012886/print-binary-tree-level-by-level-in-python
 
 def skriv (pointer):
+    #In-order
     if pointer != None:
         # Call recursive -> left
         skriv(pointer.left)
