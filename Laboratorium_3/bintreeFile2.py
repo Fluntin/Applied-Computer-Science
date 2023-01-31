@@ -27,7 +27,6 @@ class Bintree:
 def putta (root, newvalue):
     # If no root node -> create root node
     if root == None:
-        #print("Root created")
         return(Node(newvalue))
     #------------------------------------------------- OK
     # Else there exists a root node -> return is always root! -> no changes
@@ -37,7 +36,6 @@ def putta (root, newvalue):
             
             if pointer.left == None:
                 pointer.left=Node(newvalue)
-                #print("Left node created")
                 #Done!
                 return (root)
             else:
@@ -48,14 +46,12 @@ def putta (root, newvalue):
             
             if pointer.right == None:
                 pointer.right=Node(newvalue)
-                #print("Right nodecreated")
                 #Done!
                 return (root)
             else:
                 # Call recursive -> right
                 putta (pointer.right, newvalue)
     #------------------------------------------------- OK   
-    
     return (root) 
     #------------------------------------------------- OK  
   

@@ -28,7 +28,7 @@ def putta(root, newvalue):
     if root is None:
         return Node(newvalue)
     
-    
+    # Nice solution!
     if newvalue > root.value:
         root.right = putta(root.right, newvalue)
     else:
