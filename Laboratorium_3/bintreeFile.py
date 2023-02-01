@@ -74,11 +74,3 @@ def skriv (pointer):
         print(pointer.value, end=' ')
         # Call recursive -> right
         skriv(pointer.right)
-        
-        
-    
-            
-                
-            
-        
- 
