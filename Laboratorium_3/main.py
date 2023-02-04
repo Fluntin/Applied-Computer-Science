@@ -19,7 +19,7 @@ def searches(tree):
 
 def main():
     tree = makeTree()
-    #tree.write()
+    tree.write()
     searches(tree)
     
 main()
