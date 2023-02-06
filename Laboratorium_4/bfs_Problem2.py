@@ -41,6 +41,7 @@ def create_candidate_word(temporary):
 
 #----------------------------------------------------------------------               
 # 3. -> Makechildren 
+# Referens => gamla, svenska
 def makechildren(nod, q, slutord, svenska, gamla):
 
     gamla.put(startord)
@@ -60,6 +61,7 @@ def makechildren(nod, q, slutord, svenska, gamla):
                 new_word=candidate
                 q.enqueue(new_word)
                 gamla.put(new_word)
+                #gamla.write()
                 if new_word == slutord:
                     return new_word
                         
