@@ -74,13 +74,14 @@ if __name__ == "__main__":
     q = LinkedQ()
     gamla=Bintree()
     svenska=läsa_in_ordlistan()
+    startord,slutord = user_input()
     
-    startord, slutord = user_input()
+    trigger=True
 
     q.enqueue(startord)
     existance_of_path = None
     
-    while not q.isEmpty():
+    while not q.isEmpty() and startord in svenska:
         nod = q.dequeue()
         existance_of_path = makechildren(nod, q, slutord, svenska, gamla)
         if existance_of_path != None:
