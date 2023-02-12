@@ -50,6 +50,8 @@ def makechildren(nod, q, slutord, svenska, gamla):
     
     index = 0
     for letter in temporary:
+        #print(letter)
+        #print(temporary)
         
         for alphabeth_letter in alphabeth:
             temporary.remove(letter)
