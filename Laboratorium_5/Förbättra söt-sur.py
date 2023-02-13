@@ -47,13 +47,7 @@ def makechildren(q, parent):
     # Big O -> O(n^2) ???
     index=0   
     for letter in temporary:
-        print(letter)
-        print(parent.word)
-        print(temporary)
         for alphabeth_letter in alphabeth:
-            print(letter)
-            print(parent.word)
-            print(temporary)
             temporary.remove(letter)
             temporary.insert(index,alphabeth_letter)
 
@@ -68,7 +62,7 @@ def makechildren(q, parent):
                 q.enqueue(new_node)
                 gamla.put(new_word)
                 
-            temporary = list (startord)
+            temporary = list (new_node.word)
         index+=1
         
 #----------------------------------------------------------------------             
