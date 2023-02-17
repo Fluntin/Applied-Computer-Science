@@ -74,7 +74,8 @@ def makechildren(node, q, slutord, svenska, gamla): #Make_connection skulle kans
                 q.enqueue(newNode)
                 gamla.put(new_word)
                 if new_word == slutord:
-                    end_node = ParentNode(new_word, node)
+                    #end_node = ParentNode(new_word, node)
+                    end_node = newNode
                     return end_node
                         
             temporary = list(node.word)
@@ -107,6 +108,7 @@ if __name__ == "__main__":
         print('Ordet finns inte i ordlistan')
     if slutord not in svenska:
         print('Slutord finns inte i ordlistan')
+        
     while not q.isEmpty() and startord in svenska:
         node = q.dequeue()
         end_node = makechildren(node, q, slutord, svenska, gamla)
