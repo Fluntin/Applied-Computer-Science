@@ -15,21 +15,23 @@ def getdata():
 #1.Linjärsökning i en osorterad lista.
 
 def linjärsökning(lista, testartist):
+    count=0
     for song in lista:
+        count+=1
         if song.artist == testartist:
-            print("linjärsökning=>Done")
             break
+    #print("linjärsökning=>Done")
+    print(count)
         
 #----------------------------------------------------------------
 #2. Binärsökning i en sorterad lista. Sortera listan först med pythons sort-metod.
 
 def binärsökning(lista, testartist):
     print("binärsökning=>Start")
-    
+  
     low = 0
     high = len(lista)-1
     found = False
-    count = 0
     while low <= high and not found:
         middle = (low + high)//2
         if lista[middle].artist == testartist:
@@ -39,8 +41,7 @@ def binärsökning(lista, testartist):
                 high = middle - 1
             else:
                 low = middle + 1
-        count += 1
-        
+         
     print("binärsökning=>Done")
     return found
 
@@ -80,3 +81,4 @@ if __name__ == "__main__":
     print("Linjärsökningen tog", round(lintime, 4) , "sekunder")
     print("Binärsökning tog", round(bintime, 10), "sekunder")
     print("Hashsökning tog", round(hashtime, 10), "sekunder")
+    print(len(lista))
