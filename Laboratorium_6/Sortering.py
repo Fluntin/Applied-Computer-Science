@@ -12,6 +12,7 @@ def getData():
     return music_library
 #----------------------------------------------------------------
 #1. quicksort
+
 def quicksort(data):
     sista = len(data) - 1
     qsort(data, 0, sista)
@@ -45,7 +46,7 @@ def partitionera(data, v, h, pivot):
             break
     data[v], data[h] = data[h], data[v]
     return v
-
+        
 #----------------------------------------------------------------
 #2. bubblesort
 def bubblesort(lista):
@@ -56,6 +57,58 @@ def bubblesort(lista):
                 lista[i] = lista[i+1]
                 lista[i+1] = temp
                 # lista[i], lista[i+1] = lista[i+1], lista[i]
+
+#----------------------------------------------------------------
+#3. merge_sort
+def merge_sort(list):
+    length = len(list)
+
+    if length == 1:
+        return list
+
+    mid = length // 2
+
+    left = merge_sort(list[:mid])
+    right = merge_sort(list[mid:])
+
+    return merge(left, right)
+
+
+def merge(left, right):
+    output = []
+    i = j = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            output.append(left[i])
+            i += 1
+        else:
+            output.append(right[j])
+            j += 1
+
+    output.extend(left[i:])
+    output.extend(right[j:])
+
+    return output
+#----------------------------------------------------------------
+#4. selection_sort
+
+def selection_sort(list):
+    n = len(list)
+
+    for i in range(n-1): 
+        min = i
+
+        for j in range(i+1, n):
+            if list[j] < list[min]:
+                min = j
+
+        if min != i:
+            temp = list[i]
+            list[i] = list[min]
+            list[min] = temp
+
+    return list
 
 #----------------------------------------------------------------
 
@@ -69,6 +122,11 @@ if __name__ == "__main__":
 
     quicksorttime = timeit.timeit(stmt = lambda: quicksort(lista), number = 1)
     bubblesorttime = timeit.timeit(stmt = lambda: bubblesort(lista), number = 1)
+    mergesorttime = timeit.timeit(stmt = lambda: merge_sort(lista), number = 1)
+    selectionsorttime = timeit.timeit(stmt = lambda: selection_sort(lista), number = 1)
+
 
     print("Quicksort tog", round(quicksorttime, 4) , "sekunder")
     print("Bubblesort tar", round(bubblesorttime, 4), "sekunder")
+    print("Mergesort tar", round(mergesorttime, 4), "sekunder")
+    print("Selectionsort tar", round(selectionsorttime, 4), "sekunder")
