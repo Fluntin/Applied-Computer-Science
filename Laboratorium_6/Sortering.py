@@ -11,41 +11,6 @@ def getData():
     
     return music_library
 #----------------------------------------------------------------
-#1. quicksort
-
-def quicksort(data):
-    sista = len(data) - 1
-    qsort(data, 0, sista)
-
-def qsort(data, low, high):
-    pivotindex = (low+high)//2
-    
-    data[pivotindex], data[high] = data[high], data[pivotindex]  
-    
-    pivotmid = partitionera(data, low-1, high, data[high]) 
-    
-    data[pivotmid], data[high] = data[high], data[pivotmid]       
-    
-    if pivotmid-low > 1:
-        qsort(data, low, pivotmid-1)
-    if high-pivotmid > 1:
-        qsort(data, pivotmid+1, high)
-
-def partitionera(data, v, h, pivot):
-    while True:
-        v = v + 1
-        while data[v] < pivot:
-            v = v + 1
-        h = h - 1
-        while h != 0 and data[h] > pivot:
-            h = h - 1
-        data[v], data[h] = data[h], data[v]
-        if v >= h: 
-            break
-    data[v], data[h] = data[h], data[v]
-    return v
-        
-#----------------------------------------------------------------
 #2. bubblesort
 def bubblesort(lista):
     for passnum in range(len(lista)-1,0,-1):
@@ -117,13 +82,13 @@ if __name__ == "__main__":
     n = len(lista)
     print("Antal element =", n)
 
-    quicksorttime = timeit.timeit(stmt = lambda: quicksort(lista), number = 1)
-    bubblesorttime = timeit.timeit(stmt = lambda: bubblesort(lista), number = 1)
     mergesorttime = timeit.timeit(stmt = lambda: merge_sort(lista), number = 1)
     selectionsorttime = timeit.timeit(stmt = lambda: selection_sort(lista), number = 1)
+    bubblesorttime = timeit.timeit(stmt = lambda: bubblesort(lista), number = 1)
 
 
-    print("Quicksort tog", round(quicksorttime, 4) , "sekunder")
-    print("Bubblesort tar", round(bubblesorttime, 4), "sekunder")
     print("Mergesort tar", round(mergesorttime, 4), "sekunder")
     print("Selectionsort tar", round(selectionsorttime, 4), "sekunder")
+    print("Bubblesort tar", round(bubblesorttime, 4), "sekunder")
+  
+    
