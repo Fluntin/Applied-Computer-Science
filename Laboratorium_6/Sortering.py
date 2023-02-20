@@ -11,17 +11,7 @@ def getData():
     
     return music_library
 #----------------------------------------------------------------
-#2. bubblesort
-def bubblesort(lista):
-    for passnum in range(len(lista)-1,0,-1):
-        for i in range(passnum):
-            if lista[i].title>lista[i+1].title:
-                temp = lista[i]
-                lista[i] = lista[i+1]
-                lista[i+1] = temp
-
-#----------------------------------------------------------------
-#3. merge_sort
+#1. merge_sort
 def merge_sort(list):
     length = len(list)
 
@@ -53,7 +43,7 @@ def merge(left, right):
 
     return output
 #----------------------------------------------------------------
-#4. selection_sort
+#2. selection_sort
 
 def selection_sort(list):
     n = len(list)
@@ -72,6 +62,16 @@ def selection_sort(list):
 
     return list
 
+#----------------------------------------------------------------
+#3. bubblesort
+def bubblesort(lista):
+    for passnum in range(len(lista)-1,0,-1):
+        for i in range(passnum):
+            if lista[i].title>lista[i+1].title:
+                temp = lista[i]
+                lista[i] = lista[i+1]
+                lista[i+1] = temp
+                
 #----------------------------------------------------------------
 
 if __name__ == "__main__":
