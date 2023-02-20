@@ -19,13 +19,11 @@ def quicksort(data):
 
 def qsort(data, low, high):
     pivotindex = (low+high)//2
-    # flytta pivot till kanten
+    
     data[pivotindex], data[high] = data[high], data[pivotindex]  
     
-    # damerna först med avseende på pivotdata
     pivotmid = partitionera(data, low-1, high, data[high]) 
     
-    # flytta tillbaka pivot
     data[pivotmid], data[high] = data[high], data[pivotmid]       
     
     if pivotmid-low > 1:
@@ -56,7 +54,6 @@ def bubblesort(lista):
                 temp = lista[i]
                 lista[i] = lista[i+1]
                 lista[i+1] = temp
-                # lista[i], lista[i+1] = lista[i+1], lista[i]
 
 #----------------------------------------------------------------
 #3. merge_sort
