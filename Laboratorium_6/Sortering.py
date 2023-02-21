@@ -65,8 +65,8 @@ def selection_sort(list):
 #----------------------------------------------------------------
 #3. bubblesort
 def bubblesort(lista):
-    for passnum in range(len(lista)-1,0,-1):
-        for i in range(passnum):
+    for run in range(len(lista)-1,0,-1):
+        for i in range(run):
             if lista[i].title>lista[i+1].title:
                 temp = lista[i]
                 lista[i] = lista[i+1]
@@ -77,18 +77,18 @@ def bubblesort(lista):
 if __name__ == "__main__":
     
     lista = getData()
-    lista = lista[:10000]
+    lista = lista[:1000000]
 
     n = len(lista)
     print("Antal element =", n)
 
     mergesorttime = timeit.timeit(stmt = lambda: merge_sort(lista), number = 1)
-    selectionsorttime = timeit.timeit(stmt = lambda: selection_sort(lista), number = 1)
-    bubblesorttime = timeit.timeit(stmt = lambda: bubblesort(lista), number = 1)
+    #selectionsorttime = timeit.timeit(stmt = lambda: selection_sort(lista), number = 1)
+    #bubblesorttime = timeit.timeit(stmt = lambda: bubblesort(lista), number = 1)
 
 
     print("Mergesort tar", round(mergesorttime, 4), "sekunder")
-    print("Selectionsort tar", round(selectionsorttime, 4), "sekunder")
-    print("Bubblesort tar", round(bubblesorttime, 4), "sekunder")
+    #print("Selectionsort tar", round(selectionsorttime, 4), "sekunder")
+    #print("Bubblesort tar", round(bubblesorttime, 4), "sekunder")
   
     
