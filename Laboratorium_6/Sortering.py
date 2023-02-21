@@ -1,5 +1,6 @@
 from Soundtrack_Class import Soundtrack
 import timeit
+import prettytable
 
 #----------------------------------------------------------------
 def getData():
@@ -84,11 +85,10 @@ if __name__ == "__main__":
 
     mergesorttime = timeit.timeit(stmt = lambda: merge_sort(lista), number = 1)
     #selectionsorttime = timeit.timeit(stmt = lambda: selection_sort(lista), number = 1)
-    #bubblesorttime = timeit.timeit(stmt = lambda: bubblesort(lista), number = 1)
+    bubblesorttime = timeit.timeit(stmt = lambda: bubblesort(lista), number = 1)
 
 
     print("Mergesort tar", round(mergesorttime, 4), "sekunder")
     #print("Selectionsort tar", round(selectionsorttime, 4), "sekunder")
-    #print("Bubblesort tar", round(bubblesorttime, 4), "sekunder")
-  
+    print("Bubblesort tar", round(bubblesorttime, 4), "sekunder")
     
