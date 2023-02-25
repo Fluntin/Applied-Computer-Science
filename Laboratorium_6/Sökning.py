@@ -68,9 +68,9 @@ if __name__ == "__main__":
     last = lista[n-1]
     testartist = last.artist
 
-    lintime = timeit.timeit(stmt = lambda: linjärsökning(lista, testartist), number = 1000000)
-    bintime = timeit.timeit(stmt = lambda: binärsökning(sorted_lista, testartist), number = 1000000)
-    hashtime = timeit.timeit(stmt = lambda: hashtabellsökning(hashtabell, testartist), number = 1000000)
+    lintime = timeit.timeit(stmt = lambda: linjärsökning(lista, testartist), number = 1000)
+    bintime = timeit.timeit(stmt = lambda: binärsökning(sorted_lista, testartist), number = 1000)
+    hashtime = timeit.timeit(stmt = lambda: hashtabellsökning(hashtabell, testartist), number = 1000)
 
     print("Linjärsökningen tog", round(lintime, 4) , "sekunder")
     print("Binärsökning tog", round(bintime, 10), "sekunder")
