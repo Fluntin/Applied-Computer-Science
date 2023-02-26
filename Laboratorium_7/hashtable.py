@@ -37,11 +37,12 @@ class Hashtable:
         node = self.table[hash]
         
         if node is not None:
-            switch= False
+            #switch= False
             if node.key == key:
                 return node.data
             else:
-                while switch is not True and hash is not None:
+                #while switch is not True and hash is not None:
+                while node is not None:
                     node = node.next
                     if node.key == key:
                         return node.data
