@@ -34,6 +34,7 @@ class TestHashtable(unittest.TestCase):
         atomlista = skapaAtomlista()
         hashtabell = lagraHashtabell(atomlista)
         self.assertFalse(knasAtomFinns(hashtabell))
+
 #######################################################################
 #       Atom-klassen
 #######################################################################
