@@ -77,9 +77,6 @@ class Hashtable:
         hash_value = (hash_value * 31 + ord(char)) % self.size
     return hash_value
 
-
-
-
 #djb2 (also known as DJBX2) is a simple non-cryptographic hash function created by Daniel J. Bernstein. 
 #It is widely used because of its simplicity, high performance, and low collision rate. 
 #The function takes a string as input and produces a 32-bit unsigned integer as output.
