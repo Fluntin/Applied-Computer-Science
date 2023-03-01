@@ -5,6 +5,8 @@ import unittest
 #       Testerna
 #######################################################################
 class TestHashtable(unittest.TestCase):
+    #The individual tests are defined with methods whose names start with the letters test. 
+    #This naming convention informs the test runner about which methods represent tests.
     def test_store(self):
         print("\nTestar att lagra en atom med namnet som nyckel")
         namn = "He"
@@ -207,4 +209,13 @@ def knasAtomFinns(hashtabell):
         #knasatom fanns inte med i hashtabellen
         return False
 if __name__ == "__main__":
+    
+    #  TU SI PROBO IZVIDITI
+    atomlista = skapaAtomlista()
+    hashtabell = lagraHashtabell(atomlista)
+    avg_length = hashtabell.average_list_length()
+    print("Average length of linked lists:", avg_length)
+
     unittest.main()
+
+    

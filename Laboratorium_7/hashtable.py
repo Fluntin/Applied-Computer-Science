@@ -8,9 +8,21 @@ class Node:
 
 class Hashtable:
 
-   def __init__(self, size=1000):
+   def __init__(self, size=800):
       self.size = size
       self.table = [None]*2*size #0.5
+      
+    #  TU SI PROBO IZVIDITI  
+   def average_list_length(self):
+        total_length = 0
+        count = 0
+        for node in self.table:
+            if node is not None:
+                count += 1
+            while node is not None:
+                total_length += 1
+                node = node.next
+        return total_length / count
 
    def store(self, key, data):
     #Stoppar in "data" med nyckeln "key" i tabellen."
@@ -64,6 +76,9 @@ class Hashtable:
     for char in key:
         hash_value = (hash_value * 31 + ord(char)) % self.size
     return hash_value
+
+
+
 
 #djb2 (also known as DJBX2) is a simple non-cryptographic hash function created by Daniel J. Bernstein. 
 #It is widely used because of its simplicity, high performance, and low collision rate. 
