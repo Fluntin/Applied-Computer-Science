@@ -1,5 +1,5 @@
 
-from myHashtable import Hashtable
+from hashtable import Hashtable
 from sys import stdin
 
 def main():
