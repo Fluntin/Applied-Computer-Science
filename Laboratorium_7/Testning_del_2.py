@@ -213,6 +213,7 @@ if __name__ == "__main__":
     #  TU SI PROBO IZVIDITI
     atomlista = skapaAtomlista()
     hashtabell = lagraHashtabell(atomlista)
+    hashtabell.visualize()
     avg_length = hashtabell.average_list_length()
     print("Average length of linked lists:", avg_length)
 

@@ -1,3 +1,14 @@
+import matplotlib.pyplot as plt
+
+#Redovisning
+
+#Vid redovisningen ska du kunna
+
+#motivera ditt val av hashfunktion, krockhantering och tabellstorlek,
+#skissa hashtabellen,
+#förklara varför hashning ger snabb sökning,
+#berätta hur en unittest-fil är upplagd
+
 
 class Node:
 #Noder till klassen Hashtable
@@ -11,7 +22,7 @@ class Hashtable:
    def __init__(self, size=800):
       self.size = size
       self.table = [None]*2*size #0.5
-      
+#---------------------------------------------------------------------    
     #  TU SI PROBO IZVIDITI  
    def average_list_length(self):
         total_length = 0
@@ -23,6 +34,18 @@ class Hashtable:
                 total_length += 1
                 node = node.next
         return total_length / count
+    
+   def visualize(self):
+        y=list()
+        for node in self.table:
+            total_length = 0
+            while node is not None:
+                total_length += 1
+                node = node.next
+            y.append(total_length)
+        
+        plt.plot(list(range(1,len(y)+1)), y)
+#---------------------------------------------------------------------
 
    def store(self, key, data):
     #Stoppar in "data" med nyckeln "key" i tabellen."
