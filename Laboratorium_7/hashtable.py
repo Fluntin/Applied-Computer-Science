@@ -97,7 +97,7 @@ class Hashtable:
     #Beräknar hashfunktionen för key"""
     hash_value = 0
     for char in key:
-        hash_value = (hash_value * 31 + ord(char)) % self.size
+        hash_value = (hash_value * 31 + ord(char)) % self.size*2
     return hash_value
 
 #djb2 (also known as DJBX2) is a simple non-cryptographic hash function created by Daniel J. Bernstein. 
