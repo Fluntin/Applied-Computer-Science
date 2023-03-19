@@ -36,11 +36,8 @@
 from linkedQueue import LinkedQ
 import string
 
-#First, we define the Syntaxfel exception class that we will use for raising syntax errors during molecule parsing:
 class Syntaxfel(Exception):
     pass
-
-#Next, we define the five functions that will check the syntax of a molecule according to the provided rules. We will implement each rule as a function.
 
 #-----------------------------------------------------------------------------------------------------------------------------
 #Rule 1: <molecule> ::= <atom> | <atom><num>
@@ -93,9 +90,6 @@ def readNumber(q):
 
 #-----------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------
-
-#Next, we define a function to store the input molecule as a linked queue:
-
 def storeMolecule(molecule):
     q = LinkedQ()
     for element in molecule:
@@ -105,7 +99,6 @@ def storeMolecule(molecule):
     return q
 
 #-----------------------------------------------------------------------------------------------------------------------------
-#Finally, we define the checkStructure function that will parse the molecule queue using the previously defined functions and return the appropriate message:
 def checkStructure(molecule):
     q = storeMolecule(molecule)
 
