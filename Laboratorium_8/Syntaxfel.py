@@ -98,8 +98,9 @@ def readNumber(q):
 
 def storeMolecule(molecule):
     q = LinkedQ()
-    for letter in molecule:
-        q.enqueue(letter)
+    for element in molecule:
+        q.enqueue(element)
+        
     q.enqueue(None)
     return q
 
@@ -115,7 +116,6 @@ def checkStructure(molecule):
         return str(fel)
 
 #-----------------------------------------------------------------------------------------------------------------------------
-#Finally, we define the main function that prompts the user to input a molecule, checks its syntax using checkStructure, and prints the appropriate message:
 def main():
     molecule = input("Skriv en molekyl: ")
     result = checkStructure(molecule)
