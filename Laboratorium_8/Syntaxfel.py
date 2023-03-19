@@ -66,7 +66,7 @@ def readLETTER(q):
     if q.peek() is None:
         raise Syntaxfel("Saknad stor bokstav")
     letter = q.dequeue()
-    if letter in string.ascii_letters:
+    if letter in list(string.ascii_uppercase):
         return letter
     raise Syntaxfel("Saknad stor bokstav")
     
