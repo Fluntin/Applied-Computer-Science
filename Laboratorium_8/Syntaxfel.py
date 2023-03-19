@@ -52,7 +52,6 @@ def readMolecule(q):
         readNumber(q)
         #readMolecule(q)
 
-
 #-----------------------------------------------------------------------------------------------------------------------------
 #Rule 2: <atom> ::= <LETTER> | <LETTER><letter>
 def readAtom(q):
@@ -60,7 +59,6 @@ def readAtom(q):
     if q.peek() is not None and q.peek() in list(string.ascii_lowercase):
         readletter(q)
     return
-
 
 #-----------------------------------------------------------------------------------------------------------------------------       
 #Rule 3: <LETTER>::= A | B | C | ... | Z
@@ -72,8 +70,6 @@ def readLETTER(q):
         return letter
     raise Syntaxfel("Saknad stor bokstav")
     
-
-
 #-----------------------------------------------------------------------------------------------------------------------------
 #Rule 4: <letter>::= a | b | c | ... | z
 def readletter(q):
@@ -113,6 +109,7 @@ def main():
     molecule = input("Skriv en molekyl: ")
     result = checkStructure(molecule)
     print(result)
+
 #----------------------------------------------------------------------------------------------------------------------------- 
 if __name__ == "__main__":
     main()
