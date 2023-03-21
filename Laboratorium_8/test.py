@@ -12,7 +12,7 @@ class SyntaxTest(unittest.TestCase):
     
     def testNumber(self):
         self.assertEqual(checkStructure("Cr2"), "Formeln är syntatiskt korrekt")
-        self.assertEqual(checkStructure("Cr1"), "För litet tal")
+        self.assertEqual(checkStructure("Cr1"), "För litet tal vid radslutet")
 
 if __name__ == '__main__':
     unittest.main()

@@ -65,24 +65,24 @@ def readAtom(q):
 def readLETTER(q):
     if q.peek() is None:
         raise Syntaxfel("Saknad stor bokstav")
-    letter = q.dequeue()
-    if letter in list(string.ascii_uppercase):
-        return letter
+    elemnt = q.dequeue()
+    if elemnt in list(string.ascii_uppercase):
+        return elemnt
     raise Syntaxfel("Saknad stor bokstav")
     
 #-----------------------------------------------------------------------------------------------------------------------------
 #Rule 4: <letter>::= a | b | c | ... | z
 def readletter(q):
-    letter = q.dequeue()
+    elemnt = q.dequeue()
     return
     
 #-----------------------------------------------------------------------------------------------------------------------------
 #Rule 5: <num> ::= 2 | 3 | 4 | ...
 def readNumber(q):
-    number = q.dequeue()
-    if int(number) > 1:
-        return
-    raise Syntaxfel("För litet tal")
+    element = q.dequeue()
+    if element.isdigit() and int(element) > 1:
+        return None
+    raise Syntaxfel("För litet tal vid radslutet ")
 
 #-----------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------
@@ -102,13 +102,16 @@ def checkStructure(molecule):
         readMolecule(q)
         return "Formeln är syntatiskt korrekt"
     except Syntaxfel as fel:
-        return str(fel)
-
+        error_message = f"{fel}: "
+        remaining_input = ''.join(list(q))[::-1].replace('\n', '', 1)[::-1]
+        return error_message + remaining_input
 #-----------------------------------------------------------------------------------------------------------------------------
 def main():
     molecule = input("Skriv en molekyl: ")
-    result = checkStructure(molecule)
-    print(result)
+    while molecule != "#":
+        result = checkStructure(molecule)
+        print(result)
+        molecule = input("Skriv en molekyl: ")
 
 #----------------------------------------------------------------------------------------------------------------------------- 
 if __name__ == "__main__":
