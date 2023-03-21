@@ -11,6 +11,17 @@ class LinkedQ:
     def __init__(self):
         self.head = None
         self.tail = None
+    
+    def __str__(self):
+        if self.isEmpty():
+            return "Queue is empty"
+        else:
+            s = ""
+            temp = self.head
+            while temp:
+                s += str(temp.data) + " "
+                temp = temp.next
+            return s.strip()
 
     def print(self):
         temp = self.head

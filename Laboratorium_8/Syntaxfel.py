@@ -109,8 +109,8 @@ def checkStructure(molecule):
         if "För litet tal vid radslutet" in error_message:
             print(error_message)
         else:
-            error_message = f"{fel} {molecule}"
-            print(error_message)
+            error_message = f"{fel} {q}"
+            print(error_message.rstrip("None"))
 #-----------------------------------------------------------------------------------------------------------------------------
 def main():
     molecules_to_be_checked=list()
