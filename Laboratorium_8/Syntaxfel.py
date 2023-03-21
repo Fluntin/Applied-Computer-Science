@@ -64,11 +64,11 @@ def readAtom(q):
 #Rule 3: <LETTER>::= A | B | C | ... | Z
 def readLETTER(q):
     if q.peek() is None:
-        raise Syntaxfel("Saknad stor bokstav")
+        raise Syntaxfel("Saknad stor bokstav vid radslutet")
     elemnt = q.dequeue()
     if elemnt in list(string.ascii_uppercase):
         return elemnt
-    raise Syntaxfel("Saknad stor bokstav")
+    raise Syntaxfel("Saknad stor bokstav vid radslutet")
     
 #-----------------------------------------------------------------------------------------------------------------------------
 #Rule 4: <letter>::= a | b | c | ... | z
@@ -80,9 +80,12 @@ def readletter(q):
 #Rule 5: <num> ::= 2 | 3 | 4 | ...
 def readNumber(q):
     element = q.dequeue()
-    if element.isdigit() and int(element) > 1:
+    if element.isdigit() and int(element) == 1 and q.peek()==None:
+        raise Syntaxfel("För litet tal vid radslutet")
+    
+    if element.isdigit() and int(element) >= 1:
         return None
-    raise Syntaxfel("För litet tal vid radslutet ")
+    raise Syntaxfel("För litet tal vid radslutet")
 
 #-----------------------------------------------------------------------------------------------------------------------------
 #-----------------------------------------------------------------------------------------------------------------------------
@@ -100,19 +103,27 @@ def checkStructure(molecule):
 
     try:
         readMolecule(q)
-        return "Formeln är syntatiskt korrekt"
+        return "Formeln är syntaktiskt korrekt"
     except Syntaxfel as fel:
-        error_message = f"{fel}: "
-        remaining_input = ''.join(list(q))[::-1].replace('\n', '', 1)[::-1]
-        return error_message + remaining_input
+        error_message = f"{fel.args[0]}"
+        if "För litet tal vid radslutet" in error_message:
+            print(error_message)
+        else:
+            error_message = f"{fel} {molecule}"
+            print(error_message)
 #-----------------------------------------------------------------------------------------------------------------------------
 def main():
-    molecule = input("Skriv en molekyl: ")
-    while molecule != "#":
-        result = checkStructure(molecule)
-        print(result)
-        molecule = input("Skriv en molekyl: ")
+    molecules_to_be_checked=list()
+    
+    candidate = input("")
+    while candidate != "#":
+        molecules_to_be_checked.append(candidate)
+        candidate = input()
 
+    for molecule in molecules_to_be_checked:
+        result = checkStructure(molecule)
+        if result is not None:
+            print(result)
 #----------------------------------------------------------------------------------------------------------------------------- 
 if __name__ == "__main__":
     main()
