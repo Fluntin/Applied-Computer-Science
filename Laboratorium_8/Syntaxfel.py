@@ -105,12 +105,9 @@ def checkStructure(molecule):
         readMolecule(q)
         return "Formeln är syntaktiskt korrekt"
     except Syntaxfel as fel:
-        error_message = f"{fel.args[0]}"
-        if "För litet tal vid radslutet" in error_message:
-            print(error_message)
-        else:
-            error_message = f"{fel} {q}"
-            print(error_message.rstrip("None"))
+        rest=str(q).replace(" ", "")
+        error_message = f"{fel.args[0]} {rest}".rstrip("None")
+        print(error_message)
 #-----------------------------------------------------------------------------------------------------------------------------
 def main():
     molecules_to_be_checked=list()
