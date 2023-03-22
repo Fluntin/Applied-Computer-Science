@@ -65,8 +65,9 @@ def readAtom(q):
 def readLETTER(q):
     if q.peek() is None:
         raise Syntaxfel("Saknad stor bokstav vid radslutet")
-    elemnt = q.dequeue()
+    elemnt = q.peek()
     if elemnt in list(string.ascii_uppercase):
+        elemnt = q.dequeue()
         return elemnt
     raise Syntaxfel("Saknad stor bokstav vid radslutet")
     
