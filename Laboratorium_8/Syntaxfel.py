@@ -46,8 +46,6 @@ def readMolecule(q):
     readAtom(q)
     if q.peek() == None:
         return
-    elif q.peek() == ".":
-        q.dequeue()
     else:
         readNumber(q)
         #readMolecule(q)
@@ -68,7 +66,7 @@ def readLETTER(q):
     elemnt = q.peek()
     if elemnt in list(string.ascii_uppercase):
         elemnt = q.dequeue()
-        return elemnt
+        return
     raise Syntaxfel("Saknad stor bokstav vid radslutet")
     
 #-----------------------------------------------------------------------------------------------------------------------------
@@ -81,11 +79,11 @@ def readletter(q):
 #Rule 5: <num> ::= 2 | 3 | 4 | ...
 def readNumber(q):
     element = q.dequeue()
-    if element.isdigit() and int(element) == 1 and q.peek()==None:
+    if element.isdigit() and int(element) == 1 and q.peek()==None: # q.peek()==None checks 1 is not the only number
         raise Syntaxfel("För litet tal vid radslutet")
     
-    if element.isdigit() and int(element) >= 1:
-        return None
+    if element.isdigit() and int(element) >= 1: #  If its 1 and there is something after it thats ok, dont start with 0!
+        return
     raise Syntaxfel("För litet tal vid radslutet")
 
 #-----------------------------------------------------------------------------------------------------------------------------
@@ -100,6 +98,7 @@ def storeMolecule(molecule):
 
 #-----------------------------------------------------------------------------------------------------------------------------
 def checkStructure(molecule):
+    
     q = storeMolecule(molecule)
 
     try:
@@ -107,7 +106,7 @@ def checkStructure(molecule):
         return "Formeln är syntaktiskt korrekt"
     except Syntaxfel as fel:
         rest=str(q).replace(" ", "")
-        error_message = f"{fel.args[0]} {rest}".rstrip("None")
+        error_message = f"{fel} {rest}".rstrip("None")
         print(error_message)
 #-----------------------------------------------------------------------------------------------------------------------------
 def main():
