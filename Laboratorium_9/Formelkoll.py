@@ -38,10 +38,10 @@
   
 # H0                     För litet tal vid radslutet
 # H1C                    För litet tal vid radslutet C
-# H02C                   För litet tal vid radslutet 2C
+# H02C                   För litet tal vid radslutet 2C -> error!!! line 219, in check_number raise SyntaxError("För litet tal vid radslutet")
 # Nacl                   Saknad stor bokstav vid radslutet cl
 # a                      Saknad stor bokstav vid radslutet a
-# (Cl)2)3                Felaktig gruppstart vid radslutet )3
+# (Cl)2)3                Felaktig gruppstart vid radslutet )3 ->works
 # )                      Felaktig gruppstart vid radslutet )
 # 2                      Felaktig gruppstart vid radslutet 2
 
@@ -144,12 +144,15 @@ def check_group(q):
     # Condition 2:
     # Again, because everything is treated as a group, we also have to check the case when we don't have parentheses. i.e
     # <group> ::= <atom> 
+
     check_atom(q)
     
     #--------------------------------------------------------------
     # Condition 3:
     # <group> ::= <atom><number>
+
     check_number(q) 
+
     return
 #------------------------------------------------------------------------
 # Rule 3:  <atom>  ::= <LETTER> | <LETTER><letter>
@@ -215,11 +218,12 @@ def check_number(q):
         number = q.dequeue()
         number_digits=number
         
-        if number is "0":
+        if number == "0":
             raise SyntaxError("För litet tal vid radslutet")
         
+        # Now we  know its not 0
         number=q.peek()
-        if q.isEmpty() is False:
+        if q.peek() is not None:
             while number is not None and number in string.digits:
                 number_digits += q.dequeue()
                 if q.isEmpty() is True:
@@ -227,7 +231,7 @@ def check_number(q):
                 number=q.peek()
         #print(number_digits)
         
-        if number_digits is "1":
+        if number_digits == "1":
             raise SyntaxError("För litet tal vid radslutet")
 
 #------------------------------------------------------------------------
