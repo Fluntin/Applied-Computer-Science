@@ -31,19 +31,19 @@
 # Si(C3(COOH)2)4(H2O)7   Formeln är syntaktiskt korrekt
 # Na332                  Formeln är syntaktiskt korrekt
   
-# C(Xx4)5                Okänd atom vid radslutet 4)5
-# C(OH4)C                Saknad siffra vid radslutet C
-# C(OH4C                 Saknad högerparentes vid radslutet
-# H2O)Fe                 Felaktig gruppstart vid radslutet )Fe
+# C(Xx4)5                Okänd atom vid radslutet 4)5 -> X
+# C(OH4)C                Saknad siffra vid radslutet C -> X
+# C(OH4C                 Saknad högerparentes vid radslutet -> X
+# H2O)Fe                 Felaktig gruppstart vid radslutet )Fe -> X
   
-# H0                     För litet tal vid radslutet
-# H1C                    För litet tal vid radslutet C
-# H02C                   För litet tal vid radslutet 2C -> error!!! line 219, in check_number raise SyntaxError("För litet tal vid radslutet")
-# Nacl                   Saknad stor bokstav vid radslutet cl
-# a                      Saknad stor bokstav vid radslutet a
-# (Cl)2)3                Felaktig gruppstart vid radslutet )3 ->works
-# )                      Felaktig gruppstart vid radslutet )
-# 2                      Felaktig gruppstart vid radslutet 2
+# H0                     För litet tal vid radslutet -> X
+# H1C                    För litet tal vid radslutet C -> X
+# H02C                   För litet tal vid radslutet 2C -> X
+# Nacl                   Saknad stor bokstav vid radslutet cl -> X
+# a                      Saknad stor bokstav vid radslutet a  -> X
+# (Cl)2)3                Felaktig gruppstart vid radslutet )3  -> X
+# )                      Felaktig gruppstart vid radslutet )  -> X
+# 2                      Felaktig gruppstart vid radslutet 2  -> X
 
 
 #Ditt program ska läsa formeln tecken för tecken och med rekursiv medåkning kolla syntaxen. 
@@ -90,7 +90,8 @@ def check_structure(molecule):
         return "Formeln är syntaktiskt korrekt"
     except Syntaxfel as fel:
         rest = str(q).replace(" ", "")
-        error_message = f"{fel} {rest}".rstrip("None")
+        error_message = f"{fel} {rest}".replace("None","")
+        #error_message = f"{fel} {str(q).replace(" ", "")}".rstrip("None")
         print(error_message)
 
 #------------------------------------------------------------------------
@@ -111,7 +112,9 @@ def check_mol(q):
 #XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 def the_golden_rule(q):
     #Since everything is a group this is how you recotnise one...
-    if q.peek() == "(" or (q.peek() is not None and  q.peek() in string.ascii_uppercase) or (q.peek() is not None and  q.peek() in string.ascii_lowercase) or (q.peek() is not None and q.peek() in string.digits):
+    # or (q.peek() is not None and  q.peek() in string.ascii_lowercase) or (q.peek() is not None and q.peek() in string.digits)
+    if q.peek() == "(" or (q.peek() is not None and  q.peek() in string.ascii_uppercase)or (q.peek() is not None and  q.peek() in string.ascii_lowercase) or (q.peek() is not None and q.peek() in string.digits):
+        #Fail om ")" eller None
         return True
     else:
         return False
@@ -129,13 +132,13 @@ def check_group(q):
     if q.peek() == "(":
         q.dequeue() # We enter a group.
         if q.peek() == ")":
-            raise SyntaxError("Saknad högerparentes") # Because it's incorrect to have just one element within parenthesis.
+            raise Syntaxfel("Saknad högerparentes vid radslutet") # Because it's incorrect to have just one element within parenthesis.
         check_mol(q) # If we know that we have more than one element in parentheses, we treat it like a group because everything is a group.
         if q.peek() != ")":
-            raise SyntaxError("Saknad högerparentes") # Because every group that begins with "(" needs to be closed with ")"
+            raise Syntaxfel("Saknad högerparentes vid radslutet") # Because every group that begins with "(" needs to be closed with ")"
         q.dequeue() # Now we know it ended with ")" so we just remove it.
         if not (q.peek() in string.digits):
-            raise SyntaxError("Saknad siffra") # Next, there is no point in having a group within parentheses if we don't have a number after the closing ")".
+            raise Syntaxfel("Saknad siffra vid radslutet") # Next, there is no point in having a group within parentheses if we don't have a number after the closing ")".
         check_number(q)
         
         # If it satisfies all of these conditions, we know that the syntax of the group is correct.
@@ -157,7 +160,7 @@ def check_group(q):
 #------------------------------------------------------------------------
 # Rule 3:  <atom>  ::= <LETTER> | <LETTER><letter>
 def check_atom(q):
-    ATOMS = [ "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg",
+    ATOMS = [ "H", "He", "Li", "Be", "B", "C", "N","F", "O",  "Ne", "Na", "Mg",
             "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr",
             "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br",
             "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd",
@@ -173,12 +176,12 @@ def check_atom(q):
     
     # Condition 1: Atom never starts with a number    
     if (q.peek() in string.digits) and (q.peek() is not None):
-        raise SyntaxError("Felaktig gruppstart")
+        raise Syntaxfel("Felaktig gruppstart vid radslutet")
     
     # Condition 2: Atom has to start with a capital letter  
     # <atom>  ::= <LETTER> 
-    if not ((q.peek() in string.ascii_uppercase) and (q.peek() is not None)):
-        raise SyntaxError("Saknad stor bokstav")
+    if (not (q.peek() in string.ascii_uppercase)) and (q.peek() is not None):
+        raise Syntaxfel("Saknad stor bokstav vid radslutet")
     
     # Condition 3: Assuming we have a starting capital letter, we have to check if the atom is in the list.
     # <atom>  ::= <LETTER> | <LETTER><letter> has to be in ATOMS
@@ -192,7 +195,7 @@ def check_atom(q):
         return
     
     else:
-        raise SyntaxError("Okänd atom vid radslutet")
+        raise Syntaxfel("Okänd atom vid radslutet")
 #------------------------------------------------------------------------
 # Rule 4:  <LETTER>::= A | B | C | ... | Z
 def LETTER(candidate):      
@@ -219,7 +222,7 @@ def check_number(q):
         number_digits=number
         
         if number == "0":
-            raise SyntaxError("För litet tal vid radslutet")
+            raise Syntaxfel("För litet tal vid radslutet")
         
         # Now we  know its not 0
         number=q.peek()
@@ -232,8 +235,11 @@ def check_number(q):
         #print(number_digits)
         
         if number_digits == "1":
-            raise SyntaxError("För litet tal vid radslutet")
+            raise Syntaxfel("För litet tal vid radslutet")
 
 #------------------------------------------------------------------------
 if __name__ == "__main__":
     main()
+    
+    
+    
