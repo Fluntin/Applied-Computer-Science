@@ -71,12 +71,14 @@ def check_structure(molecule):
         return "Formeln är syntaktiskt korrekt"
     except Syntaxfel as fel:
         rest = str(q).replace(" ", "")
-        error_message = f"{fel} {rest}".replace("None","")
+        error_message = f"{fel} {rest}".replace("None","").rstrip(" ")
         #error_message = f"{fel} {str(q).replace(" ", "")}".rstrip("None")
-        print(error_message)
+        return error_message
 #------------------------------------------------------------------------
 # Rule 1: <formel>::= <mol>
 def check_formula(q):
+    if q.peek() is None:
+        raise Syntaxfel("Saknad stor bokstav vid radslutet")
     check_mol(q)
     if q.peek() is not None:
         raise Syntaxfel("Felaktig gruppstart vid radslutet")
@@ -92,8 +94,8 @@ def check_mol(q):
 def the_golden_rule(q):
     #Since everything is a group this is how you recotnise one...
     # or (q.peek() is not None and  q.peek() in string.ascii_lowercase) or (q.peek() is not None and q.peek() in string.digits)
-    if q.peek() == "(" or (q.peek() is not None and  q.peek() in string.ascii_uppercase)or (q.peek() is not None and  q.peek() in string.ascii_lowercase) or (q.peek() is not None and q.peek() in string.digits):
-        #Fail om ")" eller None
+    #if q.peek() == "(" or (q.peek() is not None and  q.peek() in string.ascii_uppercase)or (q.peek() is not None and  q.peek() in string.ascii_lowercase) or (q.peek() is not None and q.peek() in string.digits):
+    if q.peek() != ")" and q.peek() is not None:  #Fail om ")" eller None
         return True
     else:
         return False

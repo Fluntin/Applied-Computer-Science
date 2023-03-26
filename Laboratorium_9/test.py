@@ -2,7 +2,7 @@ import io
 import sys
 import unittest
 from contextlib import redirect_stdout
-from Formelkoll import *
+from Backup import *
 
 # Na                     Formeln är syntaktiskt korrekt
 # H2O                    Formeln är syntaktiskt korrekt
@@ -44,8 +44,7 @@ class SyntaxTest(unittest.TestCase):
         self.assertEqual(check_structure('a'), 'Saknad stor bokstav vid radslutet a')
         self.assertEqual(check_structure('(Cl)2)3'), 'Felaktig gruppstart vid radslutet )3')
         self.assertEqual(check_structure(')'), 'Felaktig gruppstart vid radslutet )')
-        self.assertEqual(check_structure('2'), 'Felaktig gruppstart vid  radslutet 2') 
+        self.assertEqual(check_structure('2'), 'Felaktig gruppstart vid radslutet 2') 
         
 if __name__ == '__main__':
-    #unittest.main()
-    check_structure('C(Xx4)5').strip()
+    unittest.main()
