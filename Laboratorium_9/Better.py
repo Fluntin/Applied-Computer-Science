@@ -44,7 +44,6 @@
 #Funktionen readgroup() anropar antingen readatom() eller läser en parentes och anropar readmol() etc - allt enligt grammatiken.
 #När ett syntaxbrott upptäcks genereras en exception (raise Syntaxfel("Saknad högerparentes")) som fångas i huvudprogrammet och där skrivs hela resten av indataraden ut.
 #Man måste ofta tjuvtitta på nästa tecken i kön (med peek()) för att veta vilken gren man ska följa i syntaxträdet
-
 from LinkedQueue import LinkedQ
 import string
 #------------------------------------------------------------------------
@@ -79,7 +78,7 @@ def check_structure(molecule):
 # Rule 1: <formel>::= <mol>
 def check_formula(q):
     if q.peek() is None:
-        raise Syntaxfel("Felaktig gruppstart vid radslutet")
+        raise Syntaxfel("Saknad stor bokstav vid radslutet")
     check_mol(q)
     if q.peek() is not None:
         raise Syntaxfel("Felaktig gruppstart vid radslutet")
@@ -95,8 +94,8 @@ def check_mol(q):
 def the_golden_rule(q):
     #Since everything is a group this is how you recotnise one...
     # or (q.peek() is not None and  q.peek() in string.ascii_lowercase) or (q.peek() is not None and q.peek() in string.digits)
-    #if q.peek() == "(" or (q.peek() is not None and  q.peek() in string.ascii_uppercase)or (q.peek() is not None and  q.peek() in string.ascii_lowercase) or (q.peek() is not None and q.peek() in string.digits):
-    if q.peek() != ")" and q.peek() is not None:  #Fail om ")" eller None
+    if q.peek() == "(" or LETTER(q.peek()) or letter(q.peek()) or (q.peek() is not None and q.peek() in string.digits):
+    #if q.peek() != ")" and q.peek() is not None:  #Fail om ")" eller None
         return True
     else:
         return False
@@ -112,15 +111,11 @@ def check_group(q):
     if q.peek() == "(":
         q.dequeue() # We enter a group.
         if q.peek() == ")":
-            raise Syntaxfel("Felaktig gruppstart vid radslutet") # Because it's incorrect to have just one element within parenthesis.
+            raise Syntaxfel("Saknad högerparentes vid radslutet") # Because it's incorrect to have just one element within parenthesis.
         check_mol(q) # If we know that we have more than one element in parentheses, we treat it like a group because everything is a group.
         if q.peek() != ")":
             raise Syntaxfel("Saknad högerparentes vid radslutet") # Because every group that begins with "(" needs to be closed with ")"
         q.dequeue() # Now we know it ended with ")" so we just remove it.
-        
-        if q.peek() is None: 
-            raise Syntaxfel("Saknad siffra vid radslutet") 
-            
         if not (q.peek() in string.digits):
             raise Syntaxfel("Saknad siffra vid radslutet") # Next, there is no point in having a group within parentheses if we don't have a number after the closing ")".
         check_number(q)
