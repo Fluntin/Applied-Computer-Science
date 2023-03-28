@@ -2,7 +2,7 @@ import io
 import sys
 import unittest
 from contextlib import redirect_stdout
-from Backup import *
+from Syntaxfel import *
 
 # Na                     Formeln är syntaktiskt korrekt
 # H2O                    Formeln är syntaktiskt korrekt
