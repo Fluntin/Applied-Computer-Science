@@ -1,18 +1,27 @@
-#from hashtable import Hashtable
+#Testar klassen Hashtabell i filen hashfil.
 
+#######################################################################
+#       Atom-klassen
+#######################################################################
 class Atom:
+
     def __init__(self, namn, vikt):
         self.namn = namn
         self.vikt = vikt
+
     def __str__(self):
         return "{" + self.namn + " " +  str(self.vikt) + "}"
+
     def getnamn(self):
         return self.namn
+
     def getvikt(self):
         return self.vikt
+
 #######################################################################
 #       Hjälpfunktioner
 #######################################################################
+
 def skapaAtomlista():
     """Skapar och returnerar en lista med Atom-objekt"""
     atomdata = "H  1.00794;\
@@ -134,42 +143,13 @@ def skapaAtomlista():
         atom = Atom(namn, float(vikt))
         atomlista.append(atom)
     return atomlista
-def lagraHashtabell(atomlista):
-    """Lagrar atomlistans element i en hashtabell"""
-    antalElement = len(atomlista)
-    hashtabell = Hashtable(antalElement)
-    for atom in atomlista:
-        hashtabell.store(atom.namn, atom)
-    return hashtabell
-def allaAtomerFinns(hashtabell, atomlista):
-    """Kan man hitta alla atomer i hashtabellen?"""
-    antal = 0
-    OK = True
-    for kontrollAtom in atomlista:
-        namn, vikt = kontrollAtom.getnamn(), kontrollAtom.getvikt()
-        vikt = float(vikt)
-        try:
-            hashadAtom = hashtabell.search(namn)
-            if hashadAtom.vikt != vikt:
-                print(namn, "har fel vikt.")
-            else:
-                antal += 1
-        except KeyError:
-            print(namn, "fanns inte med i hashtabellen.")
-            OK = False
-    return OK
-def knasAtomFinns(hashtabell):
-    """Ger hashtabellen KeyError för en atom som inte finns?"""
-    knasatom = "Zz"
-    try:
-        x = hashtabell.search(knasatom)
-        #knasatom fanns med i hashtabellen
-        return True
-    except KeyError:
-        #knasatom fanns inte med i hashtabellen
-        return False
-if __name__ == "__main__":
-    
-    #  TU SI PROBO IZVIDITI
-    atomlista = skapaAtomlista()
-    hashtabell = lagraHashtabell(atomlista)
+
+
+
+def atomDict(atomlist):
+    atomDict = {}
+    for atom in atomlist:
+        atomDict[atom.namn] = atom.vikt
+    return atomDict
+
+ATOMDICT = atomDict(skapaAtomlista())

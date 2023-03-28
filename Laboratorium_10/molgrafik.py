@@ -49,7 +49,7 @@ class Molgrafik:
         atom.pack(side=LEFT)
         Label(atom,text=namn,font=self.stor,bg="yellow").pack()
         Frame(atom, height=5, bg="yellow").pack()
-        if num is not None and int(num) > 1: # change -> added int(num)>1 instead of num>1 ???
+        if num>1:
             Label(ruta, text=str(num),font=self.liten,bg="yellow").pack(side=BOTTOM)
 
     def streck(self,master):
