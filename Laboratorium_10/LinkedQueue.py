@@ -1,3 +1,12 @@
+from molgrafik import *
+
+class Ruta:
+    def __init__(self, atom="( )", num=1):
+        self.atom = atom
+        self.num = num
+        self.next = None
+        self.down = None
+
 class Node:
     def __init__(self, data, next=None):
         self.data = data
@@ -59,6 +68,11 @@ class LinkedQ:
             return None
         else:
             return self.head.data
+
+#Here I add peek_next for Lab 10
+    def peek_next(self):
+        current = self.head.next
+        return current
 
     def dequeue(self):
         if self.head == None:

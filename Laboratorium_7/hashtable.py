@@ -46,6 +46,12 @@ class Hashtable:
         
         plt.plot(list(range(1,len(y)+1)), y)
 #---------------------------------------------------------------------
+   def exists(self, startslot):
+        if self.hashlist[startslot] == None:
+            return False
+        else:
+            return True
+#---------------------------------------------------------------------
 
    def store(self, key, data):
     #Stoppar in "data" med nyckeln "key" i tabellen."
