@@ -1,4 +1,4 @@
-from hashtable import Hashtable
+#from hashtable import Hashtable
 
 class Atom:
     def __init__(self, namn, vikt):

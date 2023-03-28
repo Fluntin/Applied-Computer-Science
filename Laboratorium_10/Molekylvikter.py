@@ -7,7 +7,7 @@ import string
 from molgrafik import *
 #-------------------------------------
 #By us
-from hashtable import *
+#from hashtable import *
 from Stack_datastructure import *
 from Atom_hashed import *
 #------------------------------------------------------------------------
@@ -109,7 +109,7 @@ def the_golden_rule(q):
 def check_group(q):
     ruta = Ruta() # => Lab 10
     if q.peek() is None:
-        return
+        return ruta
     #--------------------------------------------------------------
     # Condition 1:
     # group> ::= (<mol>) <num>
