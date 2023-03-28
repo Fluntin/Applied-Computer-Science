@@ -46,15 +46,17 @@
 #Man måste ofta tjuvtitta på nästa tecken i kön (med peek()) för att veta vilken gren man ska följa i syntaxträdet
 from molgrafik import Ruta, Molgrafik
 from LinkedQueue import LinkedQ
+from atom_dict import ATOMDICT
 import string
 #------------------------------------------------------------------------
 class Syntaxfel(Exception):
     pass
 #------------------------------------------------------------------------
+
 def main():
     mg = Molgrafik()
-    
     molecule_list = []
+    
     molecule = input()
     while molecule != "#":
         molecule_list.append(molecule)
@@ -62,11 +64,36 @@ def main():
     for molecule in molecule_list:
         msg, mol = check_structure(molecule)
         if mol is not None:
-            print(mol.num)
-        
+            mg.show(mol)
+            total_weight = weight(mol)
+            print('Vikten för molekylen är', total_weight)
         if msg is not None:
             print(msg)
+
+def weight(mol):
+    if mol.next == None and mol.down == None:
+        return ATOMDICT[mol.atom] * mol.num #It's so you wont get further down
+    #There cant be a group with a mol.down and a molnext since you cant have an empty group
+    
+
+    if mol.next != None and mol.down == None and mol.atom == '()':
+        return mol.num * weight(mol.next)
+    
+    if mol.next == None and mol.down != None and mol.atom== '()':
+        return mol.num * weight(mol.down)
+    
+    if mol.next != None and mol.down != None and mol.atom == '()':
+        print(4)
+        return (weight(mol.next) + weight(mol.down))*mol.num #You traverse both directions  
+    
+    elif mol.next != None and mol.down == None:
+        return  weight(mol.next)+ ATOMDICT[mol.atom]* mol.num 
+
+    elif mol.next != None and mol.down == None:
+        return  ATOMDICT[mol.atom]* mol.num + weight(mol.down) 
+    
         
+
 #------------------------------------------------------------------------
 def check_structure(molecule):
     q = LinkedQ()
@@ -207,5 +234,7 @@ def check_number(q):
         return int(number_digits)
     return 1 # Default value
 #------------------------------------------------------------------------
+
 if __name__ == "__main__":
+    
     main()
