@@ -46,28 +46,54 @@
 #Man måste ofta tjuvtitta på nästa tecken i kön (med peek()) för att veta vilken gren man ska följa i syntaxträdet
 from molgrafik import Ruta, Molgrafik
 from LinkedQueue import LinkedQ
+from atom_dict import ATOMDICT
 import string
 #------------------------------------------------------------------------
 class Syntaxfel(Exception):
     pass
 #------------------------------------------------------------------------
+
 def main():
     mg = Molgrafik()
-    
     molecule_list = []
+    
     molecule = input()
     while molecule != "#":
         molecule_list.append(molecule)
         molecule = input()
     for molecule in molecule_list:
-        mol ,msg = check_structure(molecule)
-        
-        
+        msg, mol = check_structure(molecule)
+        if mol is not None:
+            mg.show(mol)
+            total_weight = weight(mol)
+            print('Vikten för molekylen är', total_weight)
         if msg is not None:
             print(msg)
-        while True:
-            mg.show(mol) 
+
+def weight(mol):
+    if mol.next == None and mol.down == None:
+        return ATOMDICT[mol.atom] * mol.num #It's so you wont get further down
+    #There cant be a group with a mol.down and a molnext since you cant have an empty group
     
+
+    if mol.next != None and mol.down == None and mol.atom == '()':
+        return mol.num * weight(mol.next)
+    
+    if mol.next == None and mol.down != None and mol.atom== '()':
+        return mol.num * weight(mol.down)
+    
+    if mol.next != None and mol.down != None and mol.atom == '()':
+        print(4)
+        return (weight(mol.next) + weight(mol.down))*mol.num #You traverse both directions  
+    
+    elif mol.next != None and mol.down == None:
+        return  weight(mol.next)+ ATOMDICT[mol.atom]* mol.num 
+
+    elif mol.next != None and mol.down == None:
+        return  ATOMDICT[mol.atom]* mol.num + weight(mol.down) 
+    
+        
+
 #------------------------------------------------------------------------
 def check_structure(molecule):
     q = LinkedQ()
@@ -75,13 +101,14 @@ def check_structure(molecule):
         q.enqueue(element)
     q.enqueue(None)
     try:
-        root =check_formula(q)
-        return root ,"Formeln är syntaktiskt korrekt"
+        mol =check_formula(q)
+        correct_msg = "Formeln är syntaktiskt korrekt" 
+        return correct_msg, mol
     except Syntaxfel as fel:
         rest = str(q).replace(" ", "")
         error_message = f"{fel} {rest}".replace("None","").rstrip(" ")
         #error_message = f"{fel} {str(q).replace(" ", "")}".rstrip("None")
-        return error_message
+        return error_message, None #if There's an error there is no mol
 #------------------------------------------------------------------------
 # Rule 1: <formel>::= <mol>
 def check_formula(q):
@@ -114,7 +141,7 @@ def the_golden_rule(q):
 def check_group(q):
     mol = Ruta()
     if q.peek() is None:
-        return
+        return mol
     #--------------------------------------------------------------
     # Condition 1:
     # group> ::= (<mol>) <num>
@@ -133,7 +160,8 @@ def check_group(q):
             
         if not (q.peek() in string.digits):
             raise Syntaxfel("Saknad siffra vid radslutet") # Next, there is no point in having a group within parentheses if we don't have a number after the closing ")".
-        mol.down = check_number(q)
+        mol.num= check_number(q)
+    
         
         # If it satisfies all of these conditions, we know that the syntax of the group is correct.
         return mol
@@ -182,20 +210,7 @@ def check_atom(q):
         return candidate
     else:
         raise Syntaxfel("Okänd atom vid radslutet")
-#------------------------------------------------------------------------
-# Rule 4:  <LETTER>::= A | B | C | ... | Z
-def LETTER(candidate):
-    if candidate != None and candidate in string.ascii_uppercase :
-        return True
-    else:
-        return False
-#------------------------------------------------------------------------
-# Rule 5:  <letter>::= a | b | c | ... | z
-def letter(candidate):
-    if candidate != None and candidate in string.ascii_lowercase:
-        return True
-    else:
-        return False
+
 #------------------------------------------------------------------------
 # Rule 6: <num>   ::= 2 | 3 | 4 | ...
 def check_number(q):
@@ -215,6 +230,11 @@ def check_number(q):
         #print(number_digits)
         if number_digits == "1":
             raise Syntaxfel("För litet tal vid radslutet")
+        
+        return int(number_digits)
+    return 1 # Default value
 #------------------------------------------------------------------------
+
 if __name__ == "__main__":
+    
     main()

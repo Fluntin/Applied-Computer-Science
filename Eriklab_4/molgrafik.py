@@ -91,4 +91,4 @@ class Molgrafik:
         self.root=Tk()
         Label(self.root,text="  ",font=self.stor,bg="white").pack(side=LEFT,fill=Y)
         self.picture(self.root,p)
-        #mainloop() #Kommentera bort om du anv. IDLE (IDLE har egen mainloop())
+        mainloop() #Kommentera bort om du anv. IDLE (IDLE har egen mainloop())
