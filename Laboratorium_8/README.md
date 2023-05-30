@@ -43,5 +43,3 @@ The implementation should include the following steps:
 5. Implement the five functions to check the syntax. If a function detects an error, such as a missing uppercase letter or a too small number, it should raise a `SyntaxError` with an appropriate error message. If everything is fine, the function does nothing.
 6. Test your program with the test program you created.
 7. Go to Kattis and make sure your program passes all the test cases.
-
-Feel free to modify and adapt this description to fit your README.md file.
