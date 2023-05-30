@@ -41,17 +41,6 @@ The program reads one or more lines from standard input. Each line represents a 
 For each line, except the line with '#', the program should indicate whether the formula is syntactically correct or report the encountered error and its position within the formula. If the formula contains multiple errors, only the first error should be reported. Ensure that the output format matches the provided examples.
 
 ### Sample Input 1/Sample Output 1
-
-Input:
-```
-Na
-H2O
-Si(C3(COOH)2)4(H2O)7
-Na332
-#
-```
-
-Output:
 ```
 Na                     Formula is syntactically correct 
 H2O                    Formula is syntactically correct 
@@ -60,7 +49,6 @@ Na332                  Formula is syntactically correct
 ```
 
 ### Sample Input 2/Sample Output 2
-
 ```
 C(Xx4)5    Unknown atom at the end: 4)5
 C(OH4)C    Missing number at the end: C
