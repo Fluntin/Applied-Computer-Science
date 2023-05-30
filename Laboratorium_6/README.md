@@ -78,7 +78,7 @@ You can choose to sort by song title or artist name. Modify your timing code fro
 
 Fill in the times in the following table:
 
-| n           | 1,000       | 10,000      | | n           | 1,000       | 10,000      | 100,000     | 1,000,000   |
+| n           | 1,000       | 10,000      | 100,000     | 1,000,000   |
 |-------------|-------------|-------------|-------------|-------------|
 | Slower Sorting Method   |             |             |             |             |
 | Faster Sorting Method   |             |             |             |             |
