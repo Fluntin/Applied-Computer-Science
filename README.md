@@ -1,5 +1,3 @@
-Sure, here's your text nicely formatted in Markdown:
-
 ## Algorithms and Data Structures
 
 A systematic presentation of computer science concepts including:
