@@ -88,3 +88,5 @@ Fill in the times in the following table:
 Write down the time complexity of the algorithms you timed above. Do your results match the theory? If not, what could be the reason?
 
 Write a comment at the end of your program where you analyze your results. Explain the difference in time between the different operations.
+
+Finished
